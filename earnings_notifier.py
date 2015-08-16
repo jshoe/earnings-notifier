@@ -14,7 +14,7 @@ def fetch_from_yahoo():
     database = {}
     tries = 0
 
-    print("Loading...\n")
+    print("Loading reports...")
 
     while date < datetime(n.year, n.month+1, n.day):
         date_str = date2str(date)
@@ -25,7 +25,7 @@ def fetch_from_yahoo():
         except urllib.error.HTTPError:
             tries += 1
             if tries > 5:
-                print("Note: Couldn't load reports on {0}.".format(date_str_dashes(date)))
+                print("Note: Couldn't load reports on {0}.".format(date2str(date)))
                 date += dt
                 tries = 0
             continue
@@ -42,7 +42,7 @@ def fetch_from_yahoo():
    
 def fetch_watchlist():
     """Return a list of ticker symbols for the user's watched stocks."""
-    stock_list = json.load(open('stock_list3.txt'))
+    stock_list = json.load(open('stock_list.txt'))
     return [stock['symbol'] for stock in stock_list]
 
 def str2date(string):
@@ -81,12 +81,12 @@ def print_all_days(database):
         d = date[0]
         header = datetime.strptime(date[0], "%Y%m%d").strftime("%A, %Y-%m-%d")
         header = "{0}{1}{2}".format(color, header, reset)
-        date_str = "{0}{1}{2}".format(color, date_str_dashes(d), reset)
         print("\n{0}:".format(header))
         if len(database[d]) == 0:
             print("  (none)")
         for stock in database[d]:
             print("  {:10s} [{:5s}]".format(stock, database[d][stock]))
+    print("\nDone!")
 
 def print_month_cals():
     """Print a calendar of the current and next month for the user."""
