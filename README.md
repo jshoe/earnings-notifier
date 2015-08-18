@@ -1,5 +1,7 @@
 # Earnings Notifier / Calendar
 
+Date authored: July 28, 2015
+
 A program to show you upcoming announced earnings dates for stocks on your watchlist
 
 - Uses http://biz.yahoo.com/research/earncal/ as its data source
